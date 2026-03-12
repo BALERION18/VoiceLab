@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voice Lab</title>
+    <link rel="icon" href="icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css?v=2">
+</head>
+<body>
+    <div class="animations">
+        <div class="circle circle1"></div>
+        <div class="circle circle2"></div>
+        <div class="circle circle3"></div>
+    </div>
+
+    <div class="applicationbox">
+        <div class="displaybox">
+            <span id="name"><i class="fa-solid fa-user-circle"></i> User</span>
+            <a href="logout.php" class="logout" title="Logout">Logout <i class="fa-solid fa-right-from-bracket"></i></a>
+        </div>
+
+
+        <aside class="navigationmenu glassbox">
+            <div class="logoarea">
+                <div class="logo">
+                    <img src="icon.png" alt="Voice Lab Logo" class="image">
+                    <span>Voice Lab</span>
+                </div>
+                <p class="subtitle">Voice Command Website</p>
+            </div>
+            
+            <nav class="links">
+                <button class="menubutton active" data-target="pagesection3">
+                    <i class="fa-solid fa-list-check"></i>
+                    <span>Voice Todo List</span>
+                </button>
+                <button class="menubutton" data-target="pagesection1">
+                    <i class="fa-solid fa-database"></i>
+                    <span>Voice SQL Generator</span>
+                </button>
+                <button class="menubutton" data-target="pagesection">
+                    <i class="fa-solid fa-volume-high"></i>
+                    <span>Text to Speech</span>
+                </button>
+                <button class="menubutton" data-target="pagesection2">
+                    <i class="fa-solid fa-file-invoice"></i>
+                    <span>Voice Form Maker</span>
+                </button>
+            </nav>
+
+            <div class="bottomarea">
+                <button id="mode" class="iconbutton" title="Toggle Theme">
+                    <i class="fa-solid fa-moon"></i>
+                </button>
+            </div>
+        </aside>
+
+        <main class="displayarea">
+            <section id="pagesection3" class="sectionpage active in">
+                <header class="headerarea">
+                    <h1 class="heading">Voice Todo List</h1>
+                    <p>Manage your tasks effortlessly using voice commands.</p>
+                </header>
+                
+                <div class="scrollarea">
+                    <div class="controlswrapper glassbox">
+                        <button id="task" class="primarybutton microphonebutton">
+                            <i class="fa-solid fa-microphone"></i>
+                            <span>Tap to Speak Task</span>
+                        </button>
+                        <p class="statustext">Say "Add task [name of task]" or "Delete task [number]"</p>
+                    </div>
+
+                    <div class="outerbox glassbox">
+                        <ul id="tasks" class="tasks">
+                            <li class="empty">No tasks yet. Speak to add one!</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section id="pagesection1" class="sectionpage">
+                <header class="headerarea">
+                    <h1 class="heading">Voice SQL Generator</h1>
+                    <p>Describe your database query, and let AI generate the SQL.</p>
+                </header>
+
+                <div class="scrollarea sidelayout">
+                    <div class="typingarea glassbox">
+                        <h3>Query Description</h3>
+                        <div class="controlswrapper width">
+                            <button id="sql" class="primarybutton microphonebutton widthelement">
+                                <i class="fa-solid fa-microphone"></i>
+                                <span>Dictate Requirements</span>
+                            </button>
+                        </div>
+                        <div class="fieldwrapper">
+                            <textarea id="description" placeholder="Or type your requirements here... e.g. 'Get all users who signed up in the last 30 days and have purchased at least one item.'"></textarea>
+                        </div>
+                        <button id="code" class="highlightbutton widthelement">
+                            <i class="fa-solid fa-wand-magic-sparkles"></i>
+                            <span>Generate SQL</span>
+                        </button>
+                    </div>
+                    
+                    <div class="resultarea glassbox">
+                        <div class="title">
+                            <h3>Generated Code</h3>
+                            <button id="sqltext" class="icon" title="Copy to clipboard">
+                                <i class="fa-regular fa-copy"></i> Copy
+                            </button>
+                        </div>
+                        <div class="code1">
+                            <pre><code id="sqltext1" class="language-sql">-- Your generated SQL will appear here...</code></pre>
+                            <div id="sql1" class="loader hidden">
+                                <span class="dot"></span>
+                                <span class="dot"></span>
+                                <span class="dot"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="pagesection" class="sectionpage">
+                <header class="headerarea">
+                    <h1 class="heading">Text to Speech</h1>
+                    <p>Convert your written text into natural-sounding speech.</p>
+                </header>
+
+                <div class="scrollarea middlelayout">
+                    <div class="mainbox glassbox">
+                        <div class="fieldwrapper">
+                            <label for="speak">Text to Speak</label>
+                            <textarea id="speak" placeholder="Enter text here..."></textarea>
+                        </div>
+
+                        <div class="slidersarea">
+                            <div class="inputgroup">
+                                <label for="voice">Voice</label>
+                                <select id="voice" class="dropdownmenu">
+                                    <option value="">Loading voices...</option>
+                                </select>
+                            </div>
+                            
+                            <div class="sliderscontainer">
+                                <div class="sliderbox">
+                                    <label for="speed">Speed (<span id="number">1.0</span>x)</label>
+                                    <input type="range" id="speed" min="0.5" max="2" value="1" step="0.1">
+                                </div>
+                                <div class="sliderbox">
+                                    <label for="pitch">Pitch (<span id="number1">1.0</span>)</label>
+                                    <input type="range" id="pitch" min="0" max="2" value="1" step="0.1">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="buttonsrow">
+                            <button id="audio1" class="primarybutton hover">
+                                <i class="fa-solid fa-play"></i>
+                                <span>Play</span>
+                            </button>
+                            <button id="audio" class="secondarybutton">
+                                <i class="fa-solid fa-pause"></i>
+                                <span>Pause</span>
+                            </button>
+                            <button id="audio2" class="secondarybutton">
+                                <i class="fa-solid fa-stop"></i>
+                                <span>Stop</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="pagesection2" class="sectionpage">
+                <header class="headerarea">
+                    <h1 class="heading">Voice Form Maker</h1>
+                    <p>Build accessible HTML forms using voice commands.</p>
+                </header>
+
+                <div class="scrollarea sidelayout">
+                    <div class="side glassbox">
+                        <h3>Form Builder</h3>
+                        <p class="statustext small">Try saying things like:<br/>"Add Name"<br/>"Add Email"<br/>"Add button Submit"</p>
+                        
+                        <div class="controlswrapper width top">
+                            <button id="form1" class="primarybutton microphonebutton widthelement">
+                                <i class="fa-solid fa-microphone"></i>
+                                <span>Listen for Elements</span>
+                            </button>
+                        </div>
+
+                        <div class="divider"></div>
+
+                        <div class="download">
+                            <button id="form2" class="secondarybutton widthelement bottom">
+                                <i class="fa-solid fa-trash-can"></i>
+                                <span>Clear Canvas</span>
+                            </button>
+                            <button id="file" class="highlightbutton widthelement">
+                                <i class="fa-solid fa-download"></i>
+                                <span>Download HTML Form</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="form4 glassbox">
+                        <div class="title">
+                            <h3>Live Preview</h3>
+                        </div>
+                        <div class="form">
+                            <form id="form6" class="form7" onsubmit="event.preventDefault();">
+                                <div class="empty">Your form preview will appear here. Start dictating fields!</div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <div id="alertscontainer" class="alertscontainer"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
